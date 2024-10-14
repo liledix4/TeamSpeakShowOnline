@@ -1,0 +1,197 @@
+* {box-sizing: border-box;}
+body {
+	font-family: "Segoe UI", sans-serif;
+	}
+form {text-align: center;}
+.title {
+	margin: 60px 0 30px;
+	}
+.float {
+	margin: 10px 0;
+	}
+.status {
+	font-size: 0;
+	padding-left: 10px;
+	}
+.online-status {
+	display: inline-block;
+	padding: 10px 0;
+	border-radius: 10px;
+	text-align: center;
+	min-width: 150px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+	background-color: rgba(0, 0, 0, .05);
+	font-size: 12pt;
+	margin: 10px 5px 0;
+	transition: all .4s;
+	}
+	.online-status span {
+		display: block;
+		font-size: 8pt;
+		}
+	.online-status span:after {
+		content: "Loading...";
+		}
+.online-status.yes {
+	background-color: rgb(0, 170, 0);
+	color: white;
+	box-shadow: 0 5px 10px rgba(0, 170, 0, .5);
+	}
+	.online-status.yes span:after {
+		content: "Online!";
+		}
+.online-status.no {
+	background-color: rgb(255, 0, 0);
+	color: white;
+	box-shadow: 0 5px 10px rgba(255, 0, 0, .5);
+	}
+	.online-status.no span:after {
+		content: "Offline";
+		}
+.online-status.not-available {
+	background-color: rgba(0, 0, 0, .5);
+	color: rgba(255, 255, 255, .5);
+	}
+	.online-status.not-available span:after {
+		content: "Not available";
+		}
+.servers-info {display: none;}
+	.servers-info.show {display: block;}
+.show-servers-info {
+	cursor: pointer;
+	display: block;
+	padding: 5px 10px;
+	margin: 10px auto;
+	border-radius: 10px;
+	text-align: center;
+	width: 300px;
+	max-width: calc(100% - 30px);
+	font-size: 10pt;
+	color: rgba(0, 0, 0, .7);
+	transition: all .2s;
+	}
+	.show-servers-info:hover {
+		color: black;
+		background-color: rgba(0, 0, 0, .05);
+		}
+	.show-servers-info.pressed {
+		background-color: rgba(0, 0, 0, .05);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .3) inset;
+		padding-top: 7px;
+		padding-bottom: 3px;
+		}
+	.show-servers-info:before {content: "▼ Details about servers ▼";}
+
+body > .loading {
+	display: block;
+	background-color: rgb(0, 170, 0);
+	color: white;
+	padding: 10px;
+	font-size: 12pt;
+	border-radius: 6px;
+	width: 600px;
+	max-width: calc(100% - 30px);
+	cursor: default;
+	box-shadow: 0 5px 10px rgba(0, 170, 0, .5);
+	transition: all .4s;
+	text-align: center;
+	margin: 20px auto
+	}
+	body > .loading.done {opacity: 0; transform: scale(.9);}
+	body > .loading.connection-error {background-color: red; box-shadow: 0 5px 10px rgba(255, 0, 0, .5);}
+body > .loading:before {content: "Getting info about servers...";}
+	body > .loading.done:before {content: "Done!";}
+	body > .loading.connection-error:before {content: "Unable to connect to internet. Check your connection";}
+#nickname, #check-online {
+	text-align: center;
+	width: 400px;
+	max-width: 100%;
+	font-family: "Segoe UI";
+	border: none;
+	outline: none;
+	}
+#nickname {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	font-size: 24pt;
+	padding: 5px 0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .25) inset;
+	font-weight: 600;
+	background-color: rgba(0, 0, 0, .05);
+	transition: all .4s;
+	display: block;
+	margin: 0 auto;
+	}
+	#nickname:focus {
+		background-color: rgba(0, 100, 200, .05);
+		box-shadow: 0 2px 4px rgba(0, 100, 200, .5) inset;
+		}
+#check-online {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-size: 10pt;
+	padding: 10px 0;
+	color: white;
+	background-color: gray;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+	}
+	#check-online.loading {cursor: wait; color: rgba(0, 0, 0, .5); background-color: rgba(0, 0, 0, .25);}
+	#check-online.confirm {cursor: pointer; background-color: rgb(0, 100, 200); box-shadow: 0 5px 10px rgba(0, 100, 200, .5);}
+	#check-online.connection-error {cursor: not-allowed; background-color: rgb(255, 0, 0); box-shadow: 0 5px 10px rgba(255, 0, 0, .5);}
+.compact {
+	cursor: pointer;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 11px;
+	text-align: center;
+	font-size: 10pt;
+	color: rgba(0, 0, 0, .7);
+	border-top-left-radius: 10px;
+	transition: all .2s;
+	}
+	.compact:before {content: "Compact mode";}
+	.compact:hover {
+		color: black;
+		background-color: rgba(0, 0, 0, .05);
+		}
+
+body.compact-mode {margin-top: 60px;}
+
+body.compact-mode form .not-for-compact,
+body.compact-mode .online-status:after
+	{display: none;}
+
+body.compact-mode form {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	font-size: 0;
+	text-align: left;
+	white-space: nowrap;
+	}
+body.compact-mode form * {vertical-align: top;}
+body.compact-mode #nickname {
+	font-size: 21px;
+	border-radius: 0;
+	text-align: left;
+	padding: 6px 10px;
+	margin: 0;
+	display: inline;
+	background-color: rgba(255, 255, 255, .95);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+	width: calc(100% - 400px);
+	box-sizing: border-box;
+	}
+body.compact-mode #nickname:focus {background-color: rgba(230, 242.5, 255, .95); box-shadow: 0 5px 10px rgba(0, 100, 200, .5);}
+body.compact-mode .status {padding: 0; margin: 0;}
+body.compact-mode .online-status {margin: 0; padding: 13px 10px; min-width: auto; width: 25%; border-radius: 0; font-size: 14px; line-height: 1em;}
+body.compact-mode .compact:before {content: "Return to the normal mode";}
+body.compact-mode .float {float: right; width: 400px; margin: 0;}
+
+@media all and (max-width: 900px) {
+	body.compact-mode #nickname {width: 100%;}
+	body.compact-mode .float {width: 100%; display: block; float: none;}
+	body.compact-mode {margin-top: 100px;}
+	}
